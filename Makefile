@@ -37,7 +37,6 @@ MAIN_CLASS := sail.Sail
 # Source files
 SOURCES := \
 	sail/Sail.java \
-	myutil/AppletFrame.java \
 	myutil/GL.java \
 	myutil/SL.java \
 	myutil/Format.java
