@@ -72,8 +72,3 @@ The simulator uses value iteration to solve a stochastic shortest path problem:
 - Action space: 8 possible headings (N, NE, E, SE, S, SW, W, NW)
 - Transition: deterministic position update, stochastic wind change
 - Cost: sailing time + tacking delay
-
-## License
-
-Based on original work by Robert Vanderbei, Princeton University.
-Copyright 1996, Princeton University - Statistics and Operations Research Program.
