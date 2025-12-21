@@ -1,0 +1,23 @@
+# Build outputs
+build/
+dist/
+
+# Compiled class files
+*.class
+
+# JAR files
+*.jar
+
+# macOS
+.DS_Store
+*.app
+
+# IDE
+.idea/
+*.iml
+.vscode/
+*.swp
+*~
+
+# Logs
+*.log
