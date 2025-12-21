@@ -1,6 +1,6 @@
 # Sailing Simulator
 
-A Java application for simulating optimal sailing strategies using dynamic programming. Originally based on Robert Vanderbei's applet code from Princeton University's Statistics and Operations Research Program.
+A Java application for simulating optimal sailing strategies using dynamic programming. Originally based on Professor Robert Vanderbei, Princeton University.
 
 ## Overview
 
