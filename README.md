@@ -1,5 +1,7 @@
 # Sailing Simulator
 
+Part of [Vanderbei's Java Simulations](https://github.com/pubino/vanderbei-apps) collection.
+
 A Java application for simulating optimal sailing strategies using dynamic programming. Originally based on Professor Robert Vanderbei, Princeton University.
 
 ## Overview
