@@ -2,56 +2,17 @@ package sail;
 
 
 import java.awt.*;
-import java.applet.*;
-import java.awt.image.*;
 import java.util.*;
 import javax.swing.*;
 
 import myutil.*;
 
-public class Sail extends Applet
+public class Sail
 {
-	Image ourimage, beach, sailboat;
-	SailFrame sf = new SailFrame();
-
 	public static void main(String[] args) {
-		Sail sail = new Sail();
-		AppletFrame frame = new AppletFrame(sail, 1020, 600);
-	}
-
-	public void init()
-	{	setLayout(new FlowLayout(FlowLayout.LEFT));
-		setBackground(Color.white);
-		add(new Button("Push here to go sailing"));
-		// Load images from classpath resources
-		ourimage = loadImage("sail/princeton_shield_small.gif");
-		beach    = loadImage("sail/beach.gif");
-		sailboat = loadImage("sail/sailboat_right.gif");
-		sf.mp.getPicture(ourimage);
-		sf.gp.getPicture(beach, sailboat);
-	}
-
-	private Image loadImage(String path) {
-		java.net.URL url = getClass().getClassLoader().getResource(path);
-		if (url != null) {
-			return Toolkit.getDefaultToolkit().getImage(url);
-		}
-		return null;
-	}
-
-	public boolean action(Event evt, Object arg)
-	{	if (arg.equals("Push here to go sailing"))
-		{	if (sf.isShowing());
-			else {sf.setVisible(true);}
-			sf.Calculate();
-		}
-		else return super.action(evt, arg);
-		return true;
-	}
-
-	public boolean handleEvent(Event evt)
-	{	if (evt.id == Event.WINDOW_DESTROY) System.exit(0);
-		return super.handleEvent(evt);
+		SailFrame sf = new SailFrame();
+		sf.loadImages();
+		sf.setVisible(true);
 	}
 }
 
@@ -109,7 +70,7 @@ class SailFrame extends JFrame
 		q.add("Center",ip);
 		q.add("South",op);
 
-		setTitle("Optimal Sailing Strategies");
+		setTitle("Sailing Simulator - Optimal Sailing Strategies");
 		setLayout(new BorderLayout(10,10));
 		add("West", q);
 		add("East", gp);
@@ -121,9 +82,25 @@ class SailFrame extends JFrame
 		gp.setFont(new Font("Courier",Font.BOLD,10));
 	}
 
+	public void loadImages() {
+		Image ourimage = loadImage("sail/princeton_shield_small.gif");
+		Image beach    = loadImage("sail/beach.gif");
+		Image sailboat = loadImage("sail/sailboat_right.gif");
+		mp.getPicture(ourimage);
+		gp.getPicture(beach, sailboat);
+	}
+
+	private Image loadImage(String path) {
+		java.net.URL url = getClass().getClassLoader().getResource(path);
+		if (url != null) {
+			return Toolkit.getDefaultToolkit().getImage(url);
+		}
+		return null;
+	}
+
 	public boolean action(Event evt, Object arg)
 	{	if (arg.equals("Exit")) {
-			dispose();
+			System.exit(0);
 		}
 		else if (arg.equals("Calculate")) {
 			Calculate();
@@ -144,7 +121,7 @@ class SailFrame extends JFrame
 	}
 
 	public boolean handleEvent(Event evt)
-	{	if (evt.id == Event.WINDOW_DESTROY) dispose();
+	{	if (evt.id == Event.WINDOW_DESTROY) System.exit(0);
 		return super.handleEvent(evt);
 	}
 
