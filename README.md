@@ -1,6 +1,6 @@
 # Sailing Simulator
 
-Part of [Prof. Robert Vanderbei's Java Applications](https://pubino.github.io/vanderbei-apps).
+Part of [Prof. Robert Vanderbei's Java Applications](https://pubino.github.io/vanderbei-apps#sail-sim).
 
 A Java application for simulating optimal sailing strategies using dynamic programming. Originally based on Professor Robert Vanderbei, Princeton University.
 
