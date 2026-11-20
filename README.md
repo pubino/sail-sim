@@ -1,5 +1,39 @@
 # Sailing Simulator
 
+[Run in your browser](https://pubino.github.io/sail-sim/).
+
+The browser uses the Java app’s in-place value iteration, wind transition
+matrix, tacking rule, and initial NE wind. The default lake and costs come
+from the desktop input panel. The initial seed of 524 makes the first
+voyage reproducible. Calculate finds the policy and runs one voyage, and
+Simulate 100 extends the current histogram with 100 more voyages.
+
+The transition editor accepts three probabilities per wind direction,
+matching the editable cells in Java. Each row must add up to one.
+
+The Python model runs in a Pyodide worker. The test suite compares it with
+the original Java app and exercises the browser controls.
+
+### Browser development
+
+```sh
+docker-compose up --build preview
+# Open http://localhost:8000
+docker-compose run --build --rm js-check
+docker-compose run --build --rm test
+```
+
+For a local test with JDK 25, uv and Node installed:
+
+```sh
+uv sync --locked --python 3.13.12
+uv run python scripts/build_site.py
+uv run playwright install --only-shell chromium
+uv run python -m unittest discover -s tests -v
+npm ci
+npm run check
+```
+
 Part of [Prof. Robert Vanderbei's Java Applications](https://pubino.github.io/vanderbei-apps#sail-sim).
 
 A Java application for simulating optimal sailing strategies using dynamic programming. Originally based on Professor Robert Vanderbei, Princeton University.

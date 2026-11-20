@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Sailing Simulator</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow"><a href="https://pubino.github.io/vanderbei-apps/#sail-sim">Vanderbei’s applications</a> · Princeton University</p>
+      <h1>Sailing Simulator</h1>
+      <p class="intro">Find the quickest sailing policy under changing winds, then simulate voyages to see how much the crossing time varies.</p>
+    </header>
+    <section class="panel" aria-labelledby="voyage-title">
+      <h2 id="voyage-title">Voyage</h2>
+      <div class="viewer">
+        <div>
+          <canvas id="route" width="560" height="560" role="img" aria-label="Lake grid with start, destination, boat route, and wind arrows"></canvas>
+          <dl class="facts">
+            <div><dt>Expected time</dt><dd id="expected">—</dd></div>
+            <div><dt>Last voyage</dt><dd id="last">—</dd></div>
+            <div><dt>Voyages</dt><dd id="count">—</dd></div>
+          </dl>
+        </div>
+        <div>
+          <form id="settings">
+            <fieldset id="inputs" disabled>
+              <legend>Lake and policy</legend>
+              <div class="form-grid">
+                <label class="field">Lake size<input id="size" type="number" min="2" max="24" step="1" value="5" required></label>
+                <label class="field">Seed<input id="seed" type="number" min="-2147483648" max="2147483647" step="1" value="524" required></label>
+                <label class="field">Start x<input id="start-x" type="number" min="1" step="1" value="1" required></label>
+                <label class="field">Start y<input id="start-y" type="number" min="1" step="1" value="1" required></label>
+                <label class="field">End x<input id="end-x" type="number" min="1" step="1" value="4" required></label>
+                <label class="field">End y<input id="end-y" type="number" min="1" step="1" value="4" required></label>
+              </div>
+              <div class="actions">
+                <button type="submit">Calculate</button>
+                <button class="secondary" type="button" id="simulate">Simulate</button>
+                <button class="secondary" type="button" id="batch">Simulate 100</button>
+                <button class="secondary" type="button" id="show-stats">View stats</button>
+              </div>
+            </fieldset>
+            <details>
+              <summary>Sailing times and wind</summary>
+              <fieldset id="advanced" disabled>
+                <div class="form-grid">
+                  <label class="field">Into wind<input id="into" type="number" min="0.000001" max="1000000" step="any" value="100000" required></label>
+                  <label class="field">Upwind<input id="up" type="number" min="0.000001" max="1000000" step="any" value="4" required></label>
+                  <label class="field">Crosswind<input id="cross" type="number" min="0.000001" max="1000000" step="any" value="3" required></label>
+                  <label class="field">Downwind<input id="down" type="number" min="0.000001" max="1000000" step="any" value="2" required></label>
+                  <label class="field">Away from wind<input id="away" type="number" min="0.000001" max="1000000" step="any" value="1" required></label>
+                  <label class="field">Tacking delay<input id="delay" type="number" min="0" max="1000000" step="any" value="3" required></label>
+                </div>
+                <table aria-label="Wind transition probabilities">
+                  <thead><tr><th scope="col">Wind</th><th scope="col">Left</th><th scope="col">Same</th><th scope="col">Right</th></tr></thead>
+                  <tbody id="wind"></tbody>
+                </table>
+                <p class="hint">Each row gives the probabilities of a 45° turn left, no change, or a 45° turn right. Rows must sum to 1.</p>
+              </fieldset>
+            </details>
+          </form>
+          <p id="status" class="hint" role="status">Loading the Python engine…</p>
+          <p id="error" role="alert" hidden></p>
+          <button id="retry" type="button" class="secondary" hidden>Reload</button>
+        </div>
+      </div>
+    </section>
+    <section class="panel" id="stats" aria-labelledby="stats-title" hidden>
+      <h2 id="stats-title">Travel times</h2>
+      <canvas id="histogram" width="720" height="280" role="img" aria-label="Frequency of simulated travel times"></canvas>
+      <dl class="facts">
+        <div><dt>Minimum</dt><dd id="minimum">—</dd></div>
+        <div><dt>Median</dt><dd id="median">—</dd></div>
+        <div><dt>Mean</dt><dd id="mean">—</dd></div>
+        <div><dt>Maximum</dt><dd id="maximum">—</dd></div>
+      </dl>
+    </section>
+    <footer>
+      <p>Based on Robert Vanderbei’s original Java application. Python runs in your browser via
+        <a href="https://pyodide.org/">Pyodide</a>. <a href="https://github.com/pubino/sail-sim">Source on GitHub</a>.</p>
+    </footer>
+  </main>
+</body>
+</html>
